@@ -2,12 +2,18 @@
   "type": "minecraft:block",
   "pools": [
     {
+      //? if >=26.3 {
+      /*"condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      *///?} else {
       "bonus_rolls": 0.0,
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }
       ],
+      //?}
       "entries": [
         {
           "type": "minecraft:item",

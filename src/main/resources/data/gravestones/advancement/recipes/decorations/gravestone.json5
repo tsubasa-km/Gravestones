@@ -83,7 +83,11 @@
     },
     "has_the_recipe": {
       "conditions": {
+        //? if >=26.3 {
+        /*"recipes": "gravestones:gravestone"
+        *///?} else {
         "recipe": "gravestones:gravestone"
+        //?}
       },
       "trigger": "minecraft:recipe_unlocked"
     }
