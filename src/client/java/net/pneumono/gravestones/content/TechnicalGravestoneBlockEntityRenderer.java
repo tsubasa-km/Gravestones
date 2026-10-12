@@ -51,7 +51,7 @@ public class TechnicalGravestoneBlockEntityRenderer extends AbstractGravestoneBl
                 Component.empty()
         };
 
-        return new SignText(messages, messages, DyeColor.BLACK, false);
+        return new SignText(/*? if >=26.3 {*//*java.util.List.of(messages), java.util.List.of(messages)*//*?} else {*/messages, messages/*?}*/, DyeColor.BLACK, false);
     }
 
     private String getGravestoneTimeLines(TechnicalGravestoneBlockEntity entity, boolean date) {

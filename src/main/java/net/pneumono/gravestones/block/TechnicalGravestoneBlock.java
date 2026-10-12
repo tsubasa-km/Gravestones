@@ -42,7 +42,7 @@ public class TechnicalGravestoneBlock extends AbstractGravestoneBlock {
         super(settings);
     }
 
-    //? if >=1.20.3 {
+    //? if >=1.20.3 && <26.3 {
     public static final MapCodec<TechnicalGravestoneBlock> CODEC = TechnicalGravestoneBlock.simpleCodec(TechnicalGravestoneBlock::new);
 
     @Override

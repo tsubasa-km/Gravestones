@@ -15,6 +15,9 @@ import net.pneumono.gravestones.gravestones.GravestoneManager;
 
 import java.util.Collection;
 
+//? if >=26.3
+//import net.minecraft.util.Prediction;
+
 /**
  * Represents a type of data that a gravestone can store.
  *
@@ -94,7 +97,7 @@ public abstract class GravestoneDataType extends GravestoneManager {
 
     public void dropStack(Player player, ItemStack stack) {
         if (!player.addItem(stack)) {
-            ItemEntity itemEntity = player.drop(stack, false);
+            ItemEntity itemEntity = player.drop(stack, false/*? if >=26.3 {*//*, Prediction.SERVER_ONLY*//*?}*/);
             if (itemEntity != null) {
                 itemEntity.setNoPickUpDelay();
                 itemEntity.setTarget(player.getUUID());

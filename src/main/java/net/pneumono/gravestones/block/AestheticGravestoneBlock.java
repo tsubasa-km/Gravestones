@@ -54,7 +54,7 @@ public class AestheticGravestoneBlock extends AbstractGravestoneBlock {
         super(properties);
     }
 
-    //? if >=1.20.3 {
+    //? if >=1.20.3 && <26.3 {
     public static final MapCodec<AestheticGravestoneBlock> CODEC = AestheticGravestoneBlock.simpleCodec(AestheticGravestoneBlock::new);
 
     @Override
@@ -176,21 +176,21 @@ public class AestheticGravestoneBlock extends AbstractGravestoneBlock {
             /*DyeColor color = dyeItem.getDyeColor();
             *///?}
 
-            if (color != null && gravestone.changeText(text -> text.setColor(color))) {
+            if (color != null && gravestone.changeText(text -> text./*? if >=26.3 {*//*withColor*//*?} else {*/setColor/*?}*/(color))) {
                 level.playSound(null, gravestone.getBlockPos(), SoundEvents.DYE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
                 return true;
             } else {
                 return false;
             }
         } else if (item instanceof GlowInkSacItem) {
-            if (gravestone.changeText(text -> text.setHasGlowingText(true))) {
+            if (gravestone.changeText(text -> text./*? if >=26.3 {*//*withGlowingText*//*?} else {*/setHasGlowingText/*?}*/(true))) {
                 level.playSound(null, gravestone.getBlockPos(), SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
                 return true;
             } else {
                 return false;
             }
         } else if (item instanceof InkSacItem) {
-            if (gravestone.changeText(text -> text.setHasGlowingText(false))) {
+            if (gravestone.changeText(text -> text./*? if >=26.3 {*//*withGlowingText*//*?} else {*/setHasGlowingText/*?}*/(false))) {
                 level.playSound(null, gravestone.getBlockPos(), SoundEvents.INK_SAC_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
                 return true;
             } else {
@@ -198,7 +198,12 @@ public class AestheticGravestoneBlock extends AbstractGravestoneBlock {
             }
         } else if (item instanceof HoneycombItem) {
             if (gravestone.setWaxed(true)) {
+                //? if >=26.3 {
+                /*level.levelEvent(null, LevelEvent.PARTICLES_WAX_ON, gravestone.getBlockPos(), 0);
+                level.playSound(null, gravestone.getBlockPos(), SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0F, 1.0F);
+                *///?} else {
                 level.levelEvent(null, LevelEvent.PARTICLES_AND_SOUND_WAX_ON, gravestone.getBlockPos(), 0);
+                //?}
                 return true;
             } else {
                 return false;
@@ -221,7 +226,7 @@ public class AestheticGravestoneBlock extends AbstractGravestoneBlock {
         if (!blockEntity.isWaxed() && !headStack.isEmpty()) {
             level.playSound(null, blockEntity.getBlockPos(), GravestonesRegistry.SOUND_BLOCK_GRAVESTONE_REMOVE_SKULL, SoundSource.BLOCKS);
             if (!player.addItem(headStack)) {
-                player.drop(headStack, false);
+                player.drop(headStack, false/*? if >=26.3 {*//*, Prediction.SERVER_ONLY*//*?}*/);
             }
             blockEntity.setHeadStack(player, ItemStack.EMPTY);
             return InteractionResult.SUCCESS;
@@ -275,7 +280,11 @@ public class AestheticGravestoneBlock extends AbstractGravestoneBlock {
 
     private boolean isTextLiteralOrEmpty(Player player, AestheticGravestoneBlockEntity blockEntity) {
         SignText signText = blockEntity.getText();
+        //? if >=26.3 {
+        /*return signText.getMessages(player.isTextFilteringEnabled()).stream()
+        *///?} else {
         return Arrays.stream(signText.getMessages(player.isTextFilteringEnabled()))
+        //?}
                 .allMatch(message -> message.equals(CommonComponents.EMPTY) || message.getContents() instanceof /*? if >=1.20.3 {*/PlainTextContents/*?} else {*//*LiteralContents*//*?}*/);
     }
 

@@ -68,7 +68,7 @@ public class AestheticGravestoneEditScreen extends Screen {
         super(Component.translatable("gravestones.edit_text"));
         this.blockEntity = blockEntity;
         this.text = blockEntity.getText();
-        this.messages = IntStream.range(0, 4).mapToObj(line -> this.text.getMessage(line, filtered)).map(Component::getString).toArray(String[]::new);
+        this.messages = IntStream.range(0, 4).mapToObj(line -> /*? if >=26.3 {*//*this.text.getMessages(filtered).get(line)*//*?} else {*/this.text.getMessage(line, filtered)/*?}*/).map(Component::getString).toArray(String[]::new);
         Level level = blockEntity.getLevel();
         Block block;
         if (level != null) {
@@ -321,7 +321,11 @@ public class AestheticGravestoneEditScreen extends Screen {
 
     private void setCurrentRowMessage(String message) {
         this.messages[this.currentRow] = message;
+        //? if >=26.3 {
+        /*this.text = this.text.asMutable().setLine(this.currentRow, Component.literal(message)).asImmutable();
+        *///?} else {
         this.text = this.text.setMessage(this.currentRow, Component.literal(message));
+        //?}
         this.blockEntity.setText(this.text);
     }
 
